@@ -6,9 +6,8 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-mkdir build 2> /dev/null
-git show -n "$3" --name-only 
-git show -n "$3" --name-only | grep "/challenge/" | sed 's|\(.*challenge\)/.*|\1|' | uniq > build/changes.txt
+# mkdir build 2> /dev/null
+# git show -n "$3" --name-only | grep "/challenge/" | sed 's|\(.*challenge\)/.*|\1|' | uniq > build/changes.txt
 
 
 echo "+++CHALLENGES EDITED: "

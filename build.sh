@@ -7,6 +7,7 @@ if [ $# -eq 0 ]; then
 fi
 
 mkdir build 2> /dev/null
+git show -n "$3" --name-only 
 git show -n "$3" --name-only | grep "/challenge/" | sed 's|\(.*challenge\)/.*|\1|' | uniq > build/changes.txt
 
 

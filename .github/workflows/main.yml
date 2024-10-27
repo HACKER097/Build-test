@@ -23,6 +23,7 @@ jobs:
           COMMIT_RANGE="${GITHUB_EVENT_BEFORE}..${GITHUB_SHA}"
           COMMIT_COUNT=$(git rev-list --count $COMMIT_RANGE || echo "0")
          
+          echo "$COMMIT RANGE"
           echo "COMMIT COUNT: $COMMIT_COUNT"
 
           chmod +x build.sh

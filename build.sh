@@ -22,8 +22,7 @@ for d in $changes; do
         cd "$d"
 
         # Remove special chars, replace space with _
-        repo=$(basename "$(dirname "$PWD")" | sed 's/[^a-zA-Z0-9 ]//g; s/ /_/g' )
-
+        repo=$(basename "$(dirname "$PWD")" | sed 's/[^a-zA-Z0-9 ]//g; s/ /_/g' | tr '[:upper:]' '[:lower:]')
         # Run block 2 if block 1 is a success
         # Run block 3 if block 1 fails
         # Error code of only the last line is used

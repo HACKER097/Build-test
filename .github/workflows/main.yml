@@ -13,7 +13,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+        with:
+          fetch-depth: 0
+
       - name: Run script
         run: |
           
@@ -25,7 +27,6 @@ jobs:
          
           mkdir build 2> /dev/null
           git show -n "$COMMIT_COUNT" --name-only | grep "/challenge/" | sed 's|\(.*challenge\)/.*|\1|' | uniq > build/changes.txt
-          cat build/changes.txt
           
           echo "COMMIT RANGE: $COMMIT_RANGE"
           echo "COMMIT COUNT: $COMMIT_COUNT"

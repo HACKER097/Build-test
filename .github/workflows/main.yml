@@ -21,7 +21,7 @@ jobs:
           USERNAME="${{ secrets.USERNAME }}"
 
           COMMIT_RANGE="${{ github.event.before }}..${{ github.sha }}"
-          COMMIT_COUNT=$(git rev-list --count $COMMIT_RANGE || echo "1")
+          COMMIT_COUNT=$(git rev-list --count "$COMMIT_RANGE" || echo "1")
          
           echo "$COMMIT_RANGE"
           echo "COMMIT COUNT: $COMMIT_COUNT"

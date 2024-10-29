@@ -1,14 +1,14 @@
 username=$1
 password=$2
+location=$3
 
 if [ $# -eq 0 ]; then
-  echo "Usage: $0 <username> <password> <number of commits to check>"
+  echo "Usage: $0 <username> <password> <location> <number of commits to check>"
   exit 1
 fi
 
-# Moved to github action yml
-# mkdir build 2> /dev/null
-# git show -n "$3" --name-only | grep "/challenge/" | sed 's|\(.*challenge\)/.*|\1|' | uniq > build/changes.txt
+mkdir build 2> /dev/null
+git show -n "$4" --name-only | grep "/challenge/" | sed 's|\(.*challenge\)/.*|\1|' | uniq > build/changes.txt
 
 echo "+++CHALLENGES EDITED: "
 cat build/changes.txt
@@ -33,15 +33,15 @@ for d in $changes; do
         # Run block 3 if block 1 fails
         # Error code of only the last line is used
         {
-            echo "+++BUILDING: $username/$repo"
-            docker build -t "$username/$repo" . || \
-                sudo docker build -t "$username/$repo" .
+            echo "+++BUILDING: $location/$repo"
+            docker build -t "$location/$repo" . || \
+                sudo docker build -t "$location/$repo" .
 
         } && {
             echo "+++BUILD SUCCESS"
-            echo "+++PUSHING: $username/$repo"
-            docker push "$username/$repo" || \
-                sudo docker push "$username/$repo"
+            echo "+++PUSHING: $location/$repo"
+            docker push "$location/$repo" || \
+                sudo docker push "$location/$repo"
         } || {
             echo "+++FAILED: $username/$repo"
         }

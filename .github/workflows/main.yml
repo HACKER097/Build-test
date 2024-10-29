@@ -21,15 +21,14 @@ jobs:
           
           PASSWORD="${{ secrets.PASSWORD }}"
           USERNAME="${{ secrets.USERNAME }}"
+          LOCATION="${{ secrets.LOCATION }}"
 
           COMMIT_RANGE="${{ github.event.before }}..${{ github.sha }}"
           COMMIT_COUNT=$(git rev-list --count "$COMMIT_RANGE" || echo "1")
          
-          mkdir build 2> /dev/null
-          git show -n "$COMMIT_COUNT" --name-only | grep "/challenge/" | sed 's|\(.*challenge\)/.*|\1|' | uniq > build/changes.txt
           
           echo "COMMIT RANGE: $COMMIT_RANGE"
           echo "COMMIT COUNT: $COMMIT_COUNT"
 
           chmod +x build.sh
-          ./build.sh "$USERNAME" "$PASSWORD" "$COMMIT_COUNT"
+          ./build.sh "$USERNAME" "$PASSWORD" "$LOCATION" "$COMMIT_COUNT"

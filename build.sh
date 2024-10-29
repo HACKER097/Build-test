@@ -6,6 +6,7 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
+# Moved to github action yml
 # mkdir build 2> /dev/null
 # git show -n "$3" --name-only | grep "/challenge/" | sed 's|\(.*challenge\)/.*|\1|' | uniq > build/changes.txt
 
@@ -15,7 +16,7 @@ cat build/changes.txt
 
 echo "----- ----- -----"
 echo "+++LOGGING INTO DOCKERHUB"
-echo "$password" | docker login -u "$username" --password-stdin
+echo "$password" | docker login -u "$username" --password-stdin http://us-central1-docker.pkg.dev
 echo "----- ----- -----"
 
 changes=$(cat build/changes.txt)
